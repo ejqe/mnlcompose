@@ -1,4 +1,4 @@
-package com.ejqe.mnlapp.members.presentation.list
+package com.ejqe.mnlapp.members.presentation.list_members
 
 import com.ejqe.mnlapp.members.domain.Members
 

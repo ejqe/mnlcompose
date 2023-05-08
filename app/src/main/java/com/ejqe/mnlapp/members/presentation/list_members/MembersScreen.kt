@@ -18,8 +18,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.ejqe.mnlapp.members.domain.Members
-import com.ejqe.mnlapp.members.presentation.list.MembersScreenState
+import com.ejqe.mnlapp.members.presentation.list_members.MembersScreenState
 import com.ejqe.mnlapp.ui.theme.MnlappTheme
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
@@ -29,7 +31,8 @@ import com.skydoves.landscapist.coil.CoilImage
 fun MembersScreen(
     state: MembersScreenState,
     onItemClick: (name: String) -> Unit,
-    onOshiClick: (name: String, OldValue: Boolean) -> Unit
+    onOshiClick: (name: String, OldValue: Boolean) -> Unit,
+    navController: NavController
 ) {
 
     LazyColumn(
@@ -113,16 +116,4 @@ fun OshiIcon(
             .padding(8.dp)
             .clickable { onClick() }
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MnlappTheme {
-        MembersScreen(
-            MembersScreenState(members = listOf()),
-            {},
-            {_, _, ->}
-        )
-    }
 }

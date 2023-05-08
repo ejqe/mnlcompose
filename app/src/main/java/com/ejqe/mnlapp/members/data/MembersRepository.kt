@@ -1,6 +1,5 @@
 package com.ejqe.mnlapp.members.data
 
-import com.ejqe.mnlapp.members.data.local.LocalMember
 import com.ejqe.mnlapp.members.data.local.MembersDao
 import com.ejqe.mnlapp.members.data.local.OshiLocalMember
 import com.ejqe.mnlapp.members.data.remote.MembersApiService
@@ -41,26 +40,34 @@ class MembersRepository @Inject constructor(
     }
 
     //Get from local
-    suspend fun getLocalMembers(): List<Members> {
+    private suspend fun getLocalMembers(): List<Members> {
         return withContext(Dispatchers.IO) {
-           membersDao.getAll().map{//Map from LocalMember to Members(Domain)
-               Members(it.name, it.imageUrl, it.isOshi)
-           }
+           membersDao.getAll().map{ it.localToDomain() }
         }
     }
+
+
+
+    //Get Local Member
+    suspend fun getLocalMember(name: String): Members {
+        return withContext(Dispatchers.IO) {
+            membersDao.getMember(name).localToDomain()
+
+        }
+    }
+
+
+
+
 
     //Convert Remote to Local
     private suspend fun refreshCache() {
         val remoteMembers = restInterface.getMembers()
         val oshiMembers = membersDao.getAllOshied()
 
-        membersDao.addAll(remoteMembers.map {
-            LocalMember(it.name, it.imageUrl, isOshi = false)
-        })
+        membersDao.addAll(remoteMembers.map { it.remoteToLocal() })
 
-        membersDao.updateAll(oshiMembers.map {
-            OshiLocalMember(it.name, isOshi = true)
-        })
+        membersDao.updateAll(oshiMembers.map { it.localToOshiLocal() })
     }
 
 }

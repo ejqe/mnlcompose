@@ -12,7 +12,7 @@ interface MembersDao {
     fun getAll(): List<LocalMember>
 
     @Query("SELECT * FROM Members WHERE _name = :name")
-    fun getMember(name: String): LocalMember
+    fun get(name: String): LocalMember
 
     @Upsert
     suspend fun addAll(members: List<LocalMember>)

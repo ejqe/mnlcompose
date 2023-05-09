@@ -7,9 +7,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.ejqe.mnlapp.MembersScreen
 import com.ejqe.mnlapp.members.presentation.details.DetailsScreen
 import com.ejqe.mnlapp.members.presentation.details.DetailsViewModel
+import com.ejqe.mnlapp.members.presentation.list_members.MembersScreen
 import com.ejqe.mnlapp.members.presentation.list_members.MembersViewModel
 
 @Composable
@@ -26,7 +26,8 @@ fun SetUpNavGraph(navController: NavHostController) {
             MembersScreen(
                 state = viewModel.state.value,
                 onItemClick = { name: String -> navController.navigate("${Screen.Detail.route}/$name") },
-                onOshiClick = { name, oldValue -> viewModel.toggleOshiFavorite(name, oldValue) },
+                onOshiClick = { name, oldValue ->
+                    viewModel.toggleOshiFavorite(name, oldValue) },
                 navController = navController
 
             )
@@ -42,7 +43,11 @@ fun SetUpNavGraph(navController: NavHostController) {
             val viewModel: DetailsViewModel = hiltViewModel()
             val item = viewModel.state.value
             if (item != null) {
-                DetailsScreen(item = item)
+                DetailsScreen(
+                    item = item,
+                    onOshiClick = { name, oldValue ->
+                        viewModel.toggleOshiFavorite(name, oldValue) }
+                    )
             }
         }
     }

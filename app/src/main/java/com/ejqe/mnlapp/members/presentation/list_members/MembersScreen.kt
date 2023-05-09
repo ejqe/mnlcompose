@@ -1,10 +1,15 @@
-package com.ejqe.mnlapp
+package com.ejqe.mnlapp.members.presentation.list_members
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -16,13 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.ejqe.mnlapp.members.domain.Members
-import com.ejqe.mnlapp.members.presentation.list_members.MembersScreenState
-import com.ejqe.mnlapp.ui.theme.MnlappTheme
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
 
@@ -35,7 +36,8 @@ fun MembersScreen(
     navController: NavController
 ) {
 
-    LazyColumn(
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
         contentPadding = PaddingValues(vertical = 8.dp, horizontal = 8.dp)
     ) {
         items(state.members) { members ->
@@ -52,7 +54,7 @@ fun MembersScreen(
 fun MemberItem(
     item: Members,
     onItemClick: (name: String) -> Unit,
-    onOshiClick: (name: String, OldValue: Boolean) -> Unit
+    onOshiClick: (name: String, oldValue: Boolean) -> Unit
 ) {
     val icon =  if (item.isOshi) Icons.Filled.Favorite
     else Icons.Filled.FavoriteBorder
@@ -63,16 +65,26 @@ fun MemberItem(
             .padding(8.dp)
             .clickable { onItemClick(item.name) }
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .padding(8.dp)
 
         ) {
-            MemberImage(item.imageUrl)
-            MemberName(item.name)
-            OshiIcon(icon, modifier = Modifier.weight(0.15f))
-                 { onOshiClick(item.name, item.isOshi)}
+            MemberImage(
+                item.imageUrl,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(4.dp)
+
+            )
+            Row {
+                MemberName(item.name)
+                OshiIcon(icon, modifier = Modifier.weight(0.15f))
+                { onOshiClick(item.name, item.isOshi)}
+            }
+
 
         }
     }
@@ -88,16 +100,13 @@ fun MemberName(name: String) {
 }
 
 @Composable
-fun MemberImage(imageUrl: String) {
+fun MemberImage(imageUrl: String, modifier: Modifier) {
     CoilImage(
         imageModel = { imageUrl },
         imageOptions = ImageOptions(
             contentScale = ContentScale.Crop,
             alignment = Alignment.Center
-        ),
-        modifier = Modifier
-            .width(150.dp)
-            .height(150.dp)
+        )
     )
 }
 

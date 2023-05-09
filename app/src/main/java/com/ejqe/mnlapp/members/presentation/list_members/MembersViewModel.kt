@@ -29,6 +29,11 @@ class MembersViewModel @Inject constructor(
         }
     }
 
+    //1 get remote member
+    //2 cache to local(room)
+    //3 change isOshi value and save to OshiLocal Entity
+    //4 return the new toggled value list
+    //5 copy/save the list to screen state
     fun toggleOshiFavorite(name: String, OldValue: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
             val updatedMembers = toggleMemberUseCase(name, OldValue)
@@ -36,7 +41,4 @@ class MembersViewModel @Inject constructor(
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
 }

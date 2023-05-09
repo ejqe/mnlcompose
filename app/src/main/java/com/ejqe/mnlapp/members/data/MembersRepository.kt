@@ -15,11 +15,7 @@ class MembersRepository @Inject constructor(
     private var restInterface: MembersApiService,
     private var membersDao: MembersDao
 ){
-    suspend fun toggleOshi(name: String, value: Boolean) {
-        return withContext(Dispatchers.IO) {
-            membersDao.update(OshiLocalMember(name = name, isOshi = value))
-        }
-    }
+
 
     //Get from Remote Load
     suspend fun getRemoteMembers(): List<Members> {
@@ -39,8 +35,22 @@ class MembersRepository @Inject constructor(
         return getLocalMembers()
     }
 
+
+    //Convert Remote to Local; returns nothing
+    private suspend fun refreshCache() {
+        val remoteMembers = restInterface.getMembers()
+        val oshiMembers = membersDao.getAllOshied()
+
+        //map everything from REMOTE + isOshi to LOCAL
+        membersDao.addAll(remoteMembers.map { it.remoteToLocal() })
+
+        //copy/map LOCAL name and isOshi to OSHILOCAL
+        membersDao.updateAll(oshiMembers.map { it.localToOshiLocal() })
+    }
+
+
     //Get from local
-    private suspend fun getLocalMembers(): List<Members> {
+    suspend fun getLocalMembers(): List<Members> {
         return withContext(Dispatchers.IO) {
            membersDao.getAll().map{ it.localToDomain() }
         }
@@ -51,23 +61,21 @@ class MembersRepository @Inject constructor(
     //Get Local Member
     suspend fun getLocalMember(name: String): Members {
         return withContext(Dispatchers.IO) {
-            membersDao.getMember(name).localToDomain()
+            membersDao.get(name).localToDomain()
 
+        }
+    }
+
+
+    //update OSHILOCAL name and isOshi; returns nothing
+    suspend fun toggleOshi(name: String, value: Boolean) {
+        return withContext(Dispatchers.IO) {
+            membersDao.update(OshiLocalMember(name = name, isOshi = value))
         }
     }
 
 
 
 
-
-    //Convert Remote to Local
-    private suspend fun refreshCache() {
-        val remoteMembers = restInterface.getMembers()
-        val oshiMembers = membersDao.getAllOshied()
-
-        membersDao.addAll(remoteMembers.map { it.remoteToLocal() })
-
-        membersDao.updateAll(oshiMembers.map { it.localToOshiLocal() })
-    }
 
 }

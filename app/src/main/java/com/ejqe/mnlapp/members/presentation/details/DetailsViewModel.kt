@@ -16,30 +16,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val repository: MembersRepository,
     private val toggleMemberUseCase: ToggleMemberUseCase,
+    private val repository: MembersRepository,
     private val stateHandle: SavedStateHandle
-): ViewModel() {
+) : ViewModel() {
     private val _state = mutableStateOf<Members?>(null)
     val state: State<Members?> get() = _state
 
-    init { getLocal() }
+    init { getLocalMember() }
 
-    private fun getLocal() {
+    private fun getLocalMember() {
         val memberName = stateHandle.get<String>("member_name") ?: ""
         viewModelScope.launch {
             val member = repository.getLocalMember(memberName)
             _state.value = member
-
         }
     }
 
-    //1 get remote member
-    //2 cache to local(room)
-    //3 change isOshi value
-    //4 return the new toggled value list
-    //5 get selected member of type Members
-    //6 save the member to state
     fun toggleOshiFavorite(name: String, OldValue: Boolean) {
         val memberName = stateHandle.get<String>("member_name") ?: ""
         viewModelScope.launch(Dispatchers.Main) {

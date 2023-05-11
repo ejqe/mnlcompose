@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ejqe.mnlapp.members.domain.GetInitialMembersUseCase
-import com.ejqe.mnlapp.members.domain.ToggleMemberUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,12 +12,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MembersViewModel @Inject constructor(
-    private val getInitialMembersUseCase: GetInitialMembersUseCase,
-    private val toggleMemberUseCase: ToggleMemberUseCase
+    private val getInitialMembersUseCase: GetInitialMembersUseCase
 ): ViewModel() {
 
-    private val _state = mutableStateOf(MembersScreenState(members = listOf()))
-    val state: State<MembersScreenState> get() = _state
+    private val _state = mutableStateOf(
+        MembersScreenState(members = listOf())) //can be changed so it cannot be exposed outside
+    val state: State<MembersScreenState> get() = _state //cannot change, exposed outside on Read Only
 
     init { getMemberList() }
 
@@ -29,16 +28,6 @@ class MembersViewModel @Inject constructor(
         }
     }
 
-    //1 get remote member
-    //2 cache to local(room)
-    //3 change isOshi value and save to OshiLocal Entity
-    //4 return the new toggled value list
-    //5 copy/save the list to screen state
-    fun toggleOshiFavorite(name: String, OldValue: Boolean) {
-        viewModelScope.launch(Dispatchers.Main) {
-            val updatedMembers = toggleMemberUseCase(name, OldValue)
-            _state.value = _state.value.copy(members = updatedMembers)
-        }
-    }
+
 
 }

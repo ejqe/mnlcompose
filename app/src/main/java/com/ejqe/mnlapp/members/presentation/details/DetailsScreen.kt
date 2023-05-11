@@ -1,9 +1,13 @@
 package com.ejqe.mnlapp.members.presentation.details
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -12,11 +16,12 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ejqe.mnlapp.members.domain.Members
 import com.ejqe.mnlapp.members.presentation.list_members.MemberImage
 import com.ejqe.mnlapp.members.presentation.list_members.MemberName
-import com.ejqe.mnlapp.members.presentation.list_members.OshiIcon
 
 @Composable
 fun DetailsScreen(
@@ -39,14 +44,38 @@ fun DetailsScreen(
                 .width(150.dp)
                 .height(150.dp)
             )
-        MemberName(item.name)
-        OshiIcon(icon, modifier = Modifier.weight(0.15f))
+        Row (
+            verticalAlignment = Alignment.CenterVertically,
+
+                ){
+            MemberName(
+                name = item.name,
+                fontSize = 24.sp
+
+            )
+            OshiIcon(icon, modifier = Modifier.weight(0.15f))
             { onOshiClick(item.name, item.isOshi)}
+        }
 
 
         Text("More info coming soon!")
     }
 
-
 }
+
+@Composable
+fun OshiIcon(
+    icon: ImageVector,
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
+    Image(
+        imageVector = icon,
+        contentDescription = "oshi icon",
+        modifier = modifier
+            .padding(8.dp)
+            .clickable { onClick() }
+    )
+}
+
 

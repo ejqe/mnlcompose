@@ -25,9 +25,8 @@ fun SetUpNavGraph(navController: NavHostController) {
             val viewModel: MembersViewModel = hiltViewModel()
             MembersScreen(
                 state = viewModel.state.value,
-                onItemClick = { name: String -> navController.navigate("${Screen.Detail.route}/$name") },
-                onOshiClick = { name, oldValue ->
-                    viewModel.toggleOshiFavorite(name, oldValue) },
+                onItemClick = { name: String -> navController.navigate(
+                    "${Screen.Detail.route}/$name") },
                 navController = navController
 
             )

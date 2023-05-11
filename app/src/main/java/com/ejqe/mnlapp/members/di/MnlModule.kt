@@ -49,5 +49,4 @@ object MnlModule {
         return retrofit.create(MembersApiService::class.java)
     }
 
-
 }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -21,7 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ejqe.mnlapp.members.domain.Members
 import com.skydoves.landscapist.ImageOptions
@@ -32,7 +35,6 @@ import com.skydoves.landscapist.coil.CoilImage
 fun MembersScreen(
     state: MembersScreenState,
     onItemClick: (name: String) -> Unit,
-    onOshiClick: (name: String, OldValue: Boolean) -> Unit,
     navController: NavController
 ) {
 
@@ -43,8 +45,7 @@ fun MembersScreen(
         items(state.members) { members ->
             MemberItem(
                 members,
-                onItemClick = { name -> onItemClick(name) },
-                onOshiClick = { name, OldValue -> onOshiClick(name, OldValue) }
+                onItemClick = { name -> onItemClick(name) }
             )
         }
     }
@@ -53,11 +54,9 @@ fun MembersScreen(
 @Composable
 fun MemberItem(
     item: Members,
-    onItemClick: (name: String) -> Unit,
-    onOshiClick: (name: String, oldValue: Boolean) -> Unit
+    onItemClick: (name: String) -> Unit
 ) {
-    val icon =  if (item.isOshi) Icons.Filled.Favorite
-    else Icons.Filled.FavoriteBorder
+
 
     Card(
         elevation = 4.dp,
@@ -77,14 +76,12 @@ fun MemberItem(
                     .fillMaxWidth()
                     .weight(1f)
                     .padding(4.dp)
-
             )
-            Row {
-                MemberName(item.name)
-                OshiIcon(icon, modifier = Modifier.weight(0.15f))
-                { onOshiClick(item.name, item.isOshi)}
-            }
 
+            MemberName(
+                name = item.name,
+                fontSize = 12.sp
+            )
 
         }
     }
@@ -92,10 +89,11 @@ fun MemberItem(
 }
 
 @Composable
-fun MemberName(name: String) {
+fun MemberName(name: String, fontSize: TextUnit ) {
     Text(
         text = name,
-        style = MaterialTheme.typography.body2
+        style = MaterialTheme.typography.body2,
+        fontSize = fontSize
     )
 }
 
@@ -110,19 +108,6 @@ fun MemberImage(imageUrl: String, modifier: Modifier) {
     )
 }
 
-@Composable
-fun OshiIcon(
-    icon: ImageVector,
-    modifier: Modifier,
-    onClick: () -> Unit
-) {
 
 
-    Image(
-        imageVector = icon,
-        contentDescription = "oshi icon",
-        modifier = modifier
-            .padding(8.dp)
-            .clickable { onClick() }
-    )
-}
+

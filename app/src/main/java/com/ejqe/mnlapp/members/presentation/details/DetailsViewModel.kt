@@ -6,9 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ejqe.mnlapp.members.data.MembersRepository
-import com.ejqe.mnlapp.members.domain.Members
-import com.ejqe.mnlapp.members.domain.ToggleMemberUseCase
+import com.ejqe.mnlapp.members.data.repository.MemberRepositoryImpl
+import com.ejqe.mnlapp.members.domain.model.Members
+import com.ejqe.mnlapp.members.domain.use_case.ToggleMemberUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val toggleMemberUseCase: ToggleMemberUseCase,
-    private val repository: MembersRepository,
+    private val repository: MemberRepositoryImpl,
     private val stateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state = mutableStateOf<Members?>(null)

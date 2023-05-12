@@ -1,6 +1,6 @@
 package com.ejqe.mnlapp.members
 
-import com.ejqe.mnlapp.members.domain.Members
+import com.ejqe.mnlapp.members.domain.model.Members
 
 object DummyContent {
     fun FakeLocalMembers() = arrayListOf(

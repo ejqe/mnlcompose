@@ -1,4 +1,4 @@
-package com.ejqe.mnlapp.members.domain
+package com.ejqe.mnlapp.members.domain.model
 
 data class Members(
     val name: String,

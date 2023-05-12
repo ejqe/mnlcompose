@@ -1,10 +1,11 @@
-package com.ejqe.mnlapp.members.domain
+package com.ejqe.mnlapp.members.domain.use_case
 
-import com.ejqe.mnlapp.members.data.MembersRepository
+import com.ejqe.mnlapp.members.data.repository.MemberRepositoryImpl
+import com.ejqe.mnlapp.members.domain.model.Members
 import javax.inject.Inject
 
 class ToggleMemberUseCase @Inject constructor(
-    private val repository: MembersRepository
+    private val repository: MemberRepositoryImpl
 ) {
 
     //1 get remote member

@@ -1,9 +1,9 @@
-package com.ejqe.mnlapp.members.data
+package com.ejqe.mnlapp.members.data.repository
 
 import com.ejqe.mnlapp.members.data.local.MembersDao
 import com.ejqe.mnlapp.members.data.local.OshiLocalMember
 import com.ejqe.mnlapp.members.data.remote.MembersApiService
-import com.ejqe.mnlapp.members.domain.Members
+import com.ejqe.mnlapp.members.domain.model.Members
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -11,7 +11,7 @@ import java.net.ConnectException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class MembersRepository @Inject constructor(
+class MemberRepositoryImpl @Inject constructor(
     private var restInterface: MembersApiService,
     private var membersDao: MembersDao
 ){

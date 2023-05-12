@@ -1,34 +1,27 @@
 package com.ejqe.mnlapp.members.presentation.list_members
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.ejqe.mnlapp.members.domain.Members
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.coil.CoilImage
+import coil.compose.AsyncImage
+import com.ejqe.mnlapp.members.domain.model.Members
 
 
 @Composable
@@ -60,7 +53,9 @@ fun MemberItem(
 
     Card(
         elevation = 4.dp,
+        shape = RoundedCornerShape(15.dp),
         modifier = Modifier
+            .aspectRatio(0.9f)
             .padding(8.dp)
             .clickable { onItemClick(item.name) }
     ) {
@@ -71,11 +66,9 @@ fun MemberItem(
 
         ) {
             MemberImage(
-                item.imageUrl,
+                imageUrl = item.imageUrl,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(4.dp)
+
             )
 
             MemberName(
@@ -99,14 +92,16 @@ fun MemberName(name: String, fontSize: TextUnit ) {
 
 @Composable
 fun MemberImage(imageUrl: String, modifier: Modifier) {
-    CoilImage(
-        imageModel = { imageUrl },
-        imageOptions = ImageOptions(
-            contentScale = ContentScale.Crop,
-            alignment = Alignment.Center
-        )
+    AsyncImage(
+        model = imageUrl,
+        contentDescription = "member_image",
+        modifier = Modifier
+            .clip(shape = RoundedCornerShape(10))
     )
+
+
 }
+
 
 
 

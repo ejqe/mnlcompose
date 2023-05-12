@@ -3,7 +3,7 @@ package com.ejqe.mnlapp.members.data.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.ejqe.mnlapp.members.domain.Members
+import com.ejqe.mnlapp.members.domain.model.Members
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "Members")

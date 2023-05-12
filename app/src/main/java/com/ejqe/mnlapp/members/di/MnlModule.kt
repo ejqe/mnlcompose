@@ -37,16 +37,12 @@ object MnlModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideMembersApiService(): MembersApiService {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://fan-club-app-9ebd8-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .build()
-    }
-
-    @Provides
-    fun provideRetrofitApi(retrofit: Retrofit): MembersApiService {
-        return retrofit.create(MembersApiService::class.java)
+            .create(MembersApiService::class.java)
     }
 
 }

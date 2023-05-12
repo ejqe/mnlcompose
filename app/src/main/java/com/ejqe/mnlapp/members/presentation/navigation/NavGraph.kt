@@ -11,6 +11,7 @@ import com.ejqe.mnlapp.members.presentation.details.DetailsScreen
 import com.ejqe.mnlapp.members.presentation.details.DetailsViewModel
 import com.ejqe.mnlapp.members.presentation.list_members.MembersScreen
 import com.ejqe.mnlapp.members.presentation.list_members.MembersViewModel
+import com.ejqe.mnlapp.members.presentation.list_members.ShimmerList
 
 @Composable
 fun SetUpNavGraph(navController: NavHostController) {
@@ -23,13 +24,15 @@ fun SetUpNavGraph(navController: NavHostController) {
 
         composable(route = Screen.Members.route) {
             val viewModel: MembersViewModel = hiltViewModel()
-            MembersScreen(
-                state = viewModel.state.value,
-                onItemClick = { name: String -> navController.navigate(
-                    "${Screen.Detail.route}/$name") },
-                navController = navController
 
-            )
+            ShimmerList(
+                isLoading = viewModel.state.value.isLoading,
+                contentAfterLoading = {MembersScreen(
+                    state = viewModel.state.value,
+                    onItemClick = { name: String -> navController.navigate("${Screen.Detail.route}/$name") },
+                    navController = navController)}
+                )
+
         }
 
         composable(

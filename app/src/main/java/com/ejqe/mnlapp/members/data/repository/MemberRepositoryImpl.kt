@@ -67,7 +67,7 @@ class MemberRepositoryImpl @Inject constructor(
     }
 
 
-    //update OSHILOCAL name and isOshi; returns nothing
+    //update OSHILOCAL name and isOshi to newValue; returns nothing
     suspend fun toggleOshi(name: String, value: Boolean) {
         return withContext(Dispatchers.IO) {
             membersDao.update(OshiLocalMember(name = name, isOshi = value))

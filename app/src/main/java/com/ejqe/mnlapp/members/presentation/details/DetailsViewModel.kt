@@ -33,6 +33,7 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
+    //
     fun toggleOshiFavorite(name: String, OldValue: Boolean) {
         val memberName = stateHandle.get<String>("member_name") ?: ""
         viewModelScope.launch(Dispatchers.Main) {

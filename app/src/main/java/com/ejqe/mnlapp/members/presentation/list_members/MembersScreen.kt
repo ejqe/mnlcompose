@@ -30,6 +30,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.size.Size
 import com.ejqe.mnlapp.members.domain.model.Members
+import com.ejqe.mnlapp.members.presentation.details.FavIcon
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -49,7 +50,8 @@ fun MembersScreen(
             if (!state.isLoading)
                 MemberList(
                 state = state,
-                onItemClick = onItemClick)
+                onItemClick = onItemClick,
+                )
             else
                 ShimmerList()
         }
@@ -67,7 +69,7 @@ fun MemberList(
     ) {
         items(state.members) { members ->
             MemberItem(
-                members,
+                item = members,
                 onItemClick = { name -> onItemClick(name) }
             )
         }

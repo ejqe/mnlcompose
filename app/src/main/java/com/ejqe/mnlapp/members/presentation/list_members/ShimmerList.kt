@@ -28,11 +28,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ShimmerList(
-    isLoading: Boolean,
-    contentAfterLoading: @Composable () -> Unit
-) {
-    if(isLoading) {
+fun ShimmerList() {
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
             contentPadding = PaddingValues(vertical = 8.dp, horizontal = 8.dp)
@@ -47,9 +43,7 @@ fun ShimmerList(
                 ) {}
             }
         }
-    } else {
-        contentAfterLoading()
-    }
+
 }
 
 fun Modifier.shimmerEffect(): Modifier = composed {

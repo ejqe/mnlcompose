@@ -21,17 +21,16 @@ fun SetUpNavGraph(navController: NavHostController) {
     ) {
 
 
-
         composable(route = Screen.Members.route) {
             val viewModel: MembersViewModel = hiltViewModel()
 
-            ShimmerList(
-                isLoading = viewModel.state.value.isLoading,
-                contentAfterLoading = {MembersScreen(
-                    state = viewModel.state.value,
-                    onItemClick = { name: String -> navController.navigate("${Screen.Detail.route}/$name") },
-                    navController = navController)}
-                )
+            MembersScreen(
+                state = viewModel.state.value,
+                onItemClick = { name: String ->
+                    navController.navigate("${Screen.Detail.route}/$name") },
+                navController = navController
+            )
+
 
         }
 
@@ -48,8 +47,9 @@ fun SetUpNavGraph(navController: NavHostController) {
                 DetailsScreen(
                     item = item,
                     onOshiClick = { name, oldValue ->
-                        viewModel.toggleOshiFavorite(name, oldValue) }
-                    )
+                        viewModel.toggleOshiFavorite(name, oldValue)
+                    }
+                )
             }
         }
     }

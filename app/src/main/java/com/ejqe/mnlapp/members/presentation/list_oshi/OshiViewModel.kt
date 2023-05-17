@@ -23,10 +23,10 @@ class OshiViewModel @Inject constructor(
     private fun getOshiList() {
         viewModelScope.launch(Dispatchers.Main) {
             val domainMembers = repositoryImpl.getLocalMembers()
-            _state.value = domainMembers
+            val oshiMembers = domainMembers.filter { it.isOshi }
+            _state.value = oshiMembers
 
         }
-
 
     }
 

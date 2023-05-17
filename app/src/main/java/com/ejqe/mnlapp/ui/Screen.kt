@@ -1,4 +1,4 @@
-package com.ejqe.mnlapp.members.presentation.navigation
+package com.ejqe.mnlapp.ui
 
 sealed class Screen(val route: String) {
     object Home: Screen(route = "home_screen")

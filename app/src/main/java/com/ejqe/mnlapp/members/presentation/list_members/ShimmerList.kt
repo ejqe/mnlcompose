@@ -23,15 +23,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.RemeasurementModifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ShimmerList() {
+fun ShimmerList(paddingValues: PaddingValues) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
-            contentPadding = PaddingValues(vertical = 8.dp, horizontal = 8.dp)
+            contentPadding = PaddingValues(vertical = 8.dp, horizontal = 8.dp),
+            modifier = Modifier.padding(paddingValues)
         ) {
             items(30) {
                 Box(

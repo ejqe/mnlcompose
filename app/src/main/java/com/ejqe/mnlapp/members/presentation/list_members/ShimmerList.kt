@@ -33,7 +33,6 @@ fun ShimmerList(paddingValues: PaddingValues) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
             contentPadding = PaddingValues(vertical = 8.dp, horizontal = 8.dp),
-//            modifier = Modifier.padding(paddingValues)
         ) {
             items(30) {
                 Box(

@@ -40,12 +40,9 @@ fun MembersScreen(
     paddingValues: PaddingValues,
     onItemClick: (name: String) -> Unit,
 ) {
-    val input = remember { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(paddingValues)) {
-        SearchBar(input = input)
-
-
+        SearchBar()
 
         if (state.isLoading)
             ShimmerList(paddingValues = paddingValues)
@@ -53,7 +50,6 @@ fun MembersScreen(
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
                 contentPadding = PaddingValues(vertical = 8.dp, horizontal = 8.dp),
-//                modifier = Modifier.padding(paddingValues)
             ) {
                 items(state.members) { members ->
                     MemberItem(

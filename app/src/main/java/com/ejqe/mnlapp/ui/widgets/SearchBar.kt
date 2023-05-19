@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SearchBar(
-    input: MutableState<String>,
 
 ) {
     Card(
@@ -43,7 +42,6 @@ fun SearchBar(
             TextInput(
                 modifier = Modifier
                     .weight(1f),
-                input = input,
                 placeholder = "Search Members",
             )
             IconButton(

@@ -5,5 +5,6 @@ import com.ejqe.mnlapp.members.domain.model.Members
 data class MembersScreenState(
     val members: List<Members>,
     val isLoading: Boolean,
-    val error: String? = null
+    val error: String? = null,
+    val searchText: String = ""
 )

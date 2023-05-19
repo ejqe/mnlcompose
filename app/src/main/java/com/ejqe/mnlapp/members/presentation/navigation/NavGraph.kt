@@ -1,5 +1,6 @@
 package com.ejqe.mnlapp.members.presentation.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -17,7 +18,10 @@ import com.ejqe.mnlapp.members.presentation.list_oshi.OshiViewModel
 import com.ejqe.mnlapp.ui.Screen
 
 @Composable
-fun SetUpNavGraph(navController: NavHostController) {
+fun SetUpNavGraph(
+    navController: NavHostController,
+    paddingValues: PaddingValues
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route
@@ -30,6 +34,7 @@ fun SetUpNavGraph(navController: NavHostController) {
 
             MembersScreen(
                 state = viewModel.state.value,
+                paddingValues = paddingValues,
                 onItemClick = { name: String ->
                     navController.navigate("${Screen.Detail.route}/$name")
                 }

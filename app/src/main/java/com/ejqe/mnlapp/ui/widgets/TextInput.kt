@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -18,23 +17,23 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TextInput(
     modifier: Modifier = Modifier,
-    inputValue: MutableState<String>,
+    input: MutableState<String>,
     placeholder: String,
 ){
 
     val keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-    val isSingleLine: Boolean = true
+    val isSingleLine = true
 
     BasicTextField(
-        value = inputValue.value,
-        onValueChange = { inputValue.value = it },
+        value = input.value,
+        onValueChange = { input.value = it },
         modifier = modifier
             .padding(horizontal = 16.dp, vertical = 8.dp),
         singleLine = isSingleLine,
         keyboardOptions = keyboardOptions,
         decorationBox = {innerTextField ->
             Box {
-                if (inputValue.value.isEmpty()) {
+                if (input.value.isEmpty()) {
                     Text(
                         text = placeholder,
                         style = TextStyle(

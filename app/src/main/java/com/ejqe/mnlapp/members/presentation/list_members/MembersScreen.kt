@@ -1,5 +1,6 @@
 package com.ejqe.mnlapp.members.presentation.list_members
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -9,14 +10,13 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,23 +27,25 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ejqe.mnlapp.members.domain.model.Members
-import com.ejqe.mnlapp.ui.widgets.TopBarSearch
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
+import com.ejqe.mnlapp.ui.widgets.SearchBar
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MembersScreen(
     state: MembersScreenState,
+    paddingValues: PaddingValues,
     onItemClick: (name: String) -> Unit,
 ) {
-    val text = remember { mutableStateOf("") }
+    val input = remember { mutableStateOf("") }
+
+    Column(modifier = Modifier.padding(paddingValues)) {
+        SearchBar(input = input)
 
 
-    Scaffold(
-        topBar = {
-            TopBarSearch(text = text)
-        }
-
-    ) { paddingValues ->
 
         if (state.isLoading)
             ShimmerList(paddingValues = paddingValues)
@@ -51,7 +53,7 @@ fun MembersScreen(
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
                 contentPadding = PaddingValues(vertical = 8.dp, horizontal = 8.dp),
-                modifier = Modifier.padding(paddingValues)
+//                modifier = Modifier.padding(paddingValues)
             ) {
                 items(state.members) { members ->
                     MemberItem(
@@ -63,7 +65,6 @@ fun MembersScreen(
             }
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

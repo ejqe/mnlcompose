@@ -1,4 +1,4 @@
-package com.ejqe.mnlapp.ui
+package com.ejqe.mnlapp.ui.widgets
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite

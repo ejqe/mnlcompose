@@ -1,7 +1,6 @@
-package com.ejqe.mnlapp.ui
+package com.ejqe.mnlapp.ui.widgets
 
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon

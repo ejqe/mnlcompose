@@ -15,21 +15,25 @@ data class LocalMember(
 
     val imageUrl: String,
 
-    val isOshi: Boolean = false
+    val isOshi: Boolean = false,
+
+    val generation: String
 
 ) {
     fun localToDomain(): Members {
         return Members(
             name = name,
             imageUrl = imageUrl,
-            isOshi = isOshi
+            isOshi = isOshi,
+            generation = generation
+
         )
     }
 
     fun localToOshiLocal(): OshiLocalMember {
         return OshiLocalMember(
            name = name,
-           isOshi = isOshi
+           isOshi = isOshi,
         )
     }
 }

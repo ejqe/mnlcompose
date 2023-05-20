@@ -1,4 +1,4 @@
-package com.ejqe.mnlapp.ui
+package com.ejqe.mnlapp.ui.widgets
 
 sealed class Screen(val route: String) {
     object Home: Screen(route = "home_screen")
@@ -9,3 +9,4 @@ sealed class Screen(val route: String) {
 
     object Oshi: Screen(route = "oshi_screen")
 }
+

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -32,7 +31,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import com.ejqe.mnlapp.ui.widgets.SearchBar
-import com.ejqe.mnlapp.ui.widgets.TabLayout
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -45,7 +43,6 @@ fun MembersScreen(
 
     Column(modifier = Modifier.padding(paddingValues)) {
         SearchBar()
-        TabLayout()
 
         if (state.isLoading)
             ShimmerList(paddingValues = paddingValues)

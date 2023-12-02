@@ -18,8 +18,7 @@ data class RemoteMember(
         return LocalMember(
             name = name,
             imageUrl = imageUrl,
-            isOshi = false,
-            generation = generation
+            isOshi = false
         )
     }
 }

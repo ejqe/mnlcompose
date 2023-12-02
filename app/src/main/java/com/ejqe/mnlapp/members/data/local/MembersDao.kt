@@ -11,12 +11,8 @@ interface MembersDao {
     @Query("SELECT * FROM Members")
     fun getAll(): List<LocalMember>
 
-    @Query("SELECT * FROM Members WHERE generation = :generation")
-    fun filter(generation: String): List<LocalMember>
-
     @Query("SELECT * FROM Members WHERE _name = :name")
     fun get(name: String): LocalMember
-
 
     @Upsert
     suspend fun addAll(members: List<LocalMember>)

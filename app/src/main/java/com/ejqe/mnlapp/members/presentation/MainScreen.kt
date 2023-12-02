@@ -1,5 +1,6 @@
 package com.ejqe.mnlapp.members.presentation
 
+import android.annotation.SuppressLint
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -9,7 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.compose.rememberNavController
 import com.ejqe.mnlapp.members.presentation.navigation.SetUpNavGraph
-import com.ejqe.mnlapp.ui.widgets.BottomBar
+import com.ejqe.mnlapp.ui.BottomBar
 import com.ejqe.mnlapp.ui.TopBar
 
 

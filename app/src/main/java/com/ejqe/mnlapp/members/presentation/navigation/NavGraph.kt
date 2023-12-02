@@ -15,7 +15,7 @@ import com.ejqe.mnlapp.members.presentation.list_members.MembersScreen
 import com.ejqe.mnlapp.members.presentation.list_members.MembersViewModel
 import com.ejqe.mnlapp.members.presentation.list_oshi.OshiScreen
 import com.ejqe.mnlapp.members.presentation.list_oshi.OshiViewModel
-import com.ejqe.mnlapp.ui.widgets.Screen
+import com.ejqe.mnlapp.ui.Screen
 
 @Composable
 fun SetUpNavGraph(

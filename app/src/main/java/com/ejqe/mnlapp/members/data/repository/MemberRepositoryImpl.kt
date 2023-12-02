@@ -74,12 +74,6 @@ class MemberRepositoryImpl @Inject constructor(
         }
     }
 
-    suspend fun filterLocal(generation: String): List<Members> {
-        return withContext(Dispatchers.IO) {
-            membersDao.filter(generation).map{ it.localToDomain() }
-        }
-    }
-
 
 
 

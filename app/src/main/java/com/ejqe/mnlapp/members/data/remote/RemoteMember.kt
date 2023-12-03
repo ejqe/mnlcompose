@@ -12,13 +12,15 @@ data class RemoteMember(
     val bloodType: String,
     val fullName: String,
     val generation: String,
-    val height: String
+    val height: String,
+    val active: Boolean
 ) {
     fun remoteToLocal(): LocalMember {
         return LocalMember(
             name = name,
             imageUrl = imageUrl,
-            isOshi = false
+            isOshi = false,
+            active = active
         )
     }
 }

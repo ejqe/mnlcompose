@@ -16,6 +16,8 @@ interface MembersDao {
 
     @Upsert
     suspend fun addAll(members: List<LocalMember>)
+    @Query("UPDATE Members SET active = :newStatus")
+    suspend fun updateActiveStatus(newStatus: Boolean)
 
     @Update(entity = LocalMember::class)
     suspend fun update(oshiLocalMember: OshiLocalMember)
@@ -25,5 +27,7 @@ interface MembersDao {
 
     @Query("SELECT * FROM Members WHERE isOshi = 1")
     suspend fun getAllOshied(): List<LocalMember>
+
+
 
 }

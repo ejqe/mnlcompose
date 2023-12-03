@@ -14,8 +14,8 @@ data class LocalMember(
     val name: String,
 
     val imageUrl: String,
-
-    val isOshi: Boolean = false
+    val isOshi: Boolean = false,
+    val active: Boolean
 
 ) {
     fun localToDomain(): Members {
